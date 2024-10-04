@@ -1,0 +1,21 @@
+name: Download Artifact
+
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows: ["Artifact Upload and Download"]
+    types:
+      - completed
+
+jobs:
+  download-job:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Download artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: hello-artifact
+
+    - name: Print file content
+      run: cat hello.txt
